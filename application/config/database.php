@@ -67,13 +67,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $active_group variable lets you choose which connection group to
 | make active.  By default there is only one group (the 'default' group).
 */
+//require INC_ROOT . '/vendor/autoload.php';
+
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
+
 $active_group = 'default';
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => '',
-	'password' => '',
-	'database' => '',
+	'username' => 'ronald',
+	'password' => 'joaquinmateo',
+	'database' => 'starter',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -89,3 +95,25 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+$capsule = new Capsule;
+
+$capsule->addConnection([
+    'driver'    => 'mysql',
+    'host'      => $db['default']['hostname'],
+    'database'  => $db['default']['database'],
+    'username'  => $db['default']['username'],
+    'password'  => $db['default']['password'],
+    'charset'   => $db['default']['char_set'],
+    'collation' => $db['default']['dbcollat'],
+    'prefix'    => $db['default']['dbprefix'],
+]);
+
+// Event dispatcher, not required, but very handy
+$capsule->setEventDispatcher(new Dispatcher(new Container())); 
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
+// Query logging, you can also commented it out, when you don't need it
+$capsule->connection()->enableQueryLog();

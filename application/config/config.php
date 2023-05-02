@@ -78,7 +78,8 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+//$config['language']	= 'english';
+$config['language']	= 'spanish';
 
 /*
 |--------------------------------------------------------------------------
@@ -138,8 +139,12 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+//$config['composer_autoload'] = FALSE;
+//$config['composer_autoload'] = TRUE;
 
+//$config['composer_autoload'] = realpath(APPPATH . '../vendor/autoload.php');
+
+$config['composer_autoload'] = './vendor/autoload.php';
 /*
 |--------------------------------------------------------------------------
 | Allowed URL Characters
@@ -311,7 +316,8 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/userguide3/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+//$config['encryption_key'] = '';
+$config['encryption_key'] = '/vGWzt+4kzg0qzC/o/3+g+ciVlvTFjZwshppb6Vw0ok=';
 
 /*
 |--------------------------------------------------------------------------
